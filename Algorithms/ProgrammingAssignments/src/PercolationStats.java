@@ -7,6 +7,7 @@ public class PercolationStats {
         numberOfExperiments = T;
         size = N;
         results = new double[numberOfExperiments];
+        runExperiments();
     }
 
     public double mean() {
@@ -27,7 +28,6 @@ public class PercolationStats {
 
     private void runExperiments() {
         for (int count = 0; count < numberOfExperiments; count++) {
-            StdOut.println("Experiment " + Integer.toString(count + 1) + "...");
             results[count] = performExperiment(count);
         }
     }
@@ -48,7 +48,7 @@ public class PercolationStats {
     }
 
     private int getRandomNumber(int upperBound) {
-        return StdRandom.uniform(0, upperBound);
+        return StdRandom.uniform(1, upperBound);
     }
 
     public static void main(String[] args) {
@@ -57,7 +57,6 @@ public class PercolationStats {
         int T = Integer.parseInt(args[1]);
 
         PercolationStats percolationStats = new PercolationStats(N, T);
-        percolationStats.runExperiments();
         StringBuilder output = new StringBuilder();
         output.append("mean                    = " + percolationStats.mean());
         output.append("\n");

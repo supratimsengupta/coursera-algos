@@ -1,0 +1,11 @@
+Or better known as the backlash problem
+-> since the virtual top and virtual bottom are connected to the top rows and the bottom rows respectively. The bug that pops out.
+-> Any open component will return IsFull true even if it doesn't have a direct connection to the virtual TOP.
+-> The reason is that it gets connected to the top looped up from the virtual BOTTOM which might be connected to other bottom components which in turn are connected to the virtual TOP.
+
+Solutions:
+	1.) Remove the virtual Bottom
+		Repercussions: IsOpen will now be more expensive since the virtual TOP now has to try and check percolation with all the bottom components
+	2.) Use 2 UnionFind objects
+		Repercussions: will utilize twice the memory 2(N*N) where N is the number of rows and columns in an NXN matrix.
+		

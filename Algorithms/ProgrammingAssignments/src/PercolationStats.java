@@ -4,10 +4,13 @@ public class PercolationStats {
     private int numberOfExperiments;
 
     public PercolationStats(int N, int T) {
+    	if(N < 1 || T < 1){
+    		throw new IllegalArgumentException();
+    	}
+    	
         numberOfExperiments = T;
         size = N;
         results = new double[numberOfExperiments];
-        runExperiments();
     }
 
     public double mean() {
@@ -48,7 +51,7 @@ public class PercolationStats {
     }
 
     private int getRandomNumber(int upperBound) {
-        return StdRandom.uniform(1, upperBound);
+        return StdRandom.uniform(1, upperBound + 1);
     }
 
     public static void main(String[] args) {
@@ -57,6 +60,7 @@ public class PercolationStats {
         int T = Integer.parseInt(args[1]);
 
         PercolationStats percolationStats = new PercolationStats(N, T);
+        percolationStats.runExperiments();
         StringBuilder output = new StringBuilder();
         output.append("mean                    = " + percolationStats.mean());
         output.append("\n");
